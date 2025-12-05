@@ -3,6 +3,7 @@ package com.api.auth.config;
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ public class CoreDatasourceConfig {
 
     @Primary
     @Bean( name = "coreDatasource")
+    @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public DataSource datasource() {
         return DataSourceBuilder.create()
                 .type(HikariDataSource.class)

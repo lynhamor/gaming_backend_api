@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "operator")
-public abstract class Operator extends BaseEntity<Long>{
+public class Operator extends BaseEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -18,4 +18,8 @@ public abstract class Operator extends BaseEntity<Long>{
 
     @Column(name = "operator_name", nullable = false, length = 100)
     private String operatorName;
+
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
 }
