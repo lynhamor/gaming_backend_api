@@ -19,6 +19,9 @@ public class Operator extends BaseEntity<Long>{
     @Column(name = "operator_name", nullable = false, length = 100)
     private String operatorName;
 
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
+
     @Column(name = "is_active")
     private Boolean isActive = true;
 

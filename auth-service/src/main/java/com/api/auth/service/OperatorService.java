@@ -8,6 +8,7 @@ import com.api.auth.database.entity.Operator;
 import com.api.auth.database.repository.OperatorRepository;
 import com.api.auth.util.JwtUtil;
 import com.api.auth.util.KeyGeneratorUtil;
+import com.api.auth.util.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,10 @@ public class OperatorService {
     private final OperatorRepository operatorRepository;
     private final OperatorTokenRepository operatorTokenRepository;
 
-    public ResponseDto generateToken(Long operatorId) {
+    public ResponseDto generateToken(Long operatorId) throws Exception {
 
         Operator operator = operatorRepository.findById(operatorId)
-                .orElseThrow(() -> new RuntimeException("Operator not found with id: " + operatorId));
+                .orElseThrow(() -> new Exception("Operator not found with id: " + operatorId));
 
         String token = jwtUtil.generateToken(operator);
 
@@ -35,6 +36,7 @@ public class OperatorService {
 
         Operator operator = new Operator();
         operator.setOperatorName(dto.operatorName());
+        operator.setPassword(PasswordEncoder.encode(dto.password()));
         operator.setIsActive(true);
         operator.setCreatedBy("admin");
         operator.setUpdatedBy("admin");

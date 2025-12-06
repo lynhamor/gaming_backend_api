@@ -13,7 +13,7 @@ public class PasswordEncoder {
         return new BCryptPasswordEncoder(VERSION, 4).encode(rawPassword);
     }
 
-    public static String encodeAgentPassword(String rawPassword, String passwordIV) {
+    public static String encodeUserPassword(String rawPassword, String passwordIV) {
 
         return new BCryptPasswordEncoder(VERSION, 4).encode(String.format("%s%s", rawPassword, passwordIV));
     }
@@ -23,7 +23,7 @@ public class PasswordEncoder {
         return new BCryptPasswordEncoder().matches(rawPassword, encodedPassword);
     }
 
-    public static boolean matchesAgentPassword(String rawPassword, String passwordIV,  String hashedPassword) {
+    public static boolean matchesUserPassword(String rawPassword, String passwordIV, String hashedPassword) {
 
         String combined = String.format("%s%s", rawPassword, passwordIV);
         return new BCryptPasswordEncoder().matches(combined, hashedPassword);
